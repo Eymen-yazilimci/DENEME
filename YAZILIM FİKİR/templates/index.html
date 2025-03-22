@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yazılım Fikirleri</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Yazılım Fikirlerinizi Paylaşın</h1>
+    <form action="/submit" method="post">
+        <label for="title">Başlık:</label>
+        <input type="text" id="title" name="title"><br>
+        <label for="description">Açıklama:</label>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
+        <button type="submit">Gönder</button>
+    </form>
+    
+    <h2>Paylaşılan Fikirler</h2>
+    <div class="ideas-container">
+        {% for idea in ideas %}
+        <a href="/idea/{{ loop.index0 }}">
+            <div class="idea-box">
+                <h3>{{ idea.title }}</h3>
+                <p>{{ idea.description[:30] }}...</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+</html>
